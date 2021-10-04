@@ -23,9 +23,9 @@ jobs:
   setup-create-org-repo:
     uses: ci-cd-scripts/called-workflows/.github/workflows/create-org-repo.yml@main
     with:
-      username: ${{ inputs.username }}
-      org: ${{ inputs.org }}
-      repo-name: ${{ inputs.repo-name }}
+      username: ${{ github.event.inputs.username }}
+      org: ${{ github.event.inputs.org }}
+      repo-name: ${{ github.event.inputs.repo-name }}
     secrets:
       caller-token: ${{ secrets.TOKEN }}
         
