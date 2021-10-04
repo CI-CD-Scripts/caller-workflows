@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Create 
+name: Create & Setup Org Repo
 
 # Controls when the workflow will run
 on:
@@ -20,14 +20,15 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  call-create-org-repo:
-    uses: ci-cd-scripts/called-workflows/.github/workflows/create-org-repo.yml@v1.0.1
+  setup-create-org-repo:
+    uses: ci-cd-scripts/called-workflows/.github/workflows/create-org-repo.yml@main
     with:
       username: ${{ inputs.username }}
       org: ${{ inputs.org }}
       repo-name: ${{ inputs.repo-name }}
     secrets:
       caller-token: ${{ secrets.TOKEN }}
+        
 #  call-workflow-2:
 #    uses: octo-org/another-repo/.github/workflows/workflow-2.yml@v1
   
