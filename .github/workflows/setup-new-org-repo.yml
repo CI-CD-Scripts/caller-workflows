@@ -10,13 +10,13 @@ on:
       username:
         description: 'A username passed from the caller workflow'
         default: 'john-doe'
-        required: false
+        required: true
       org:
-        default: 'john-doe'
-        required: false
+        default: 'ci-cd-scripts'
+        required: true
       repo-name:
-        default: 'john-doe'
-        required: false
+        default: 'test-1'
+        required: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -24,6 +24,8 @@ jobs:
     uses: ci-cd-scripts/called-workflows/.github/workflows/create-org-repo.yml@v1
     with:
       username: ${{ inputs.username }}
+      org: ${{ inputs.org }}
+      repo-name: ${{ inputs.repo-name }}
     secrets:
       caller-token: ${{ secrets.TOKEN }}
 #  call-workflow-2:
