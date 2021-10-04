@@ -51,9 +51,9 @@ jobs:
               workflow_id: "create-org-repo.yml",
               ref: "ref",
               inputs: {
-                username: "${{ github.event.inputs.username }}",
-                org: "${{ github.event.inputs.org }}",
-                repo-name: "${{ github.event.inputs.repo-name }}"
+                "username": "${{ github.event.inputs.username }}",
+                "org": "${{ github.event.inputs.org }}",
+                "repo-name": "${{ github.event.inputs.repo-name }}"
               }
             });
           # The GitHub token used to create an authenticated client
