@@ -17,17 +17,17 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
-    - name: Install @octokit/auth-app
+    - name: Install @octokit/rest & @octokit/auth-app
       run: |
-        npm install @octokit/auth-app
+        npm install @octokit/rest @octokit/auth-app
     - name: Get token using github-script
       id: format-inputs
       uses: actions/github-script@v5
       with:
         script: |
-          console.log(github.constructor)
-          
           // Login as GitHub App
+          // https://octokit.github.io/rest.js/v18#authentication
+          const { Octokit } = require("@octokit/auth-app");
           const { createAppAuth } = require("@octokit/auth-app");
 
           const appOctokit = new Octokit({
@@ -45,5 +45,5 @@ jobs:
             // defaults to `options.auth.installationId` set in the constructor
             installationId: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
           });
-          core.setSecret(token)
+          //core.setSecret(token)
           console.log(token)
