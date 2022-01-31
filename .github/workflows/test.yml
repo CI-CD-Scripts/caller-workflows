@@ -34,7 +34,7 @@ jobs:
             authStrategy: createAppAuth,
             auth: {
               appId: '${{ secrets.APP_ISSUEOPS_ID }}',
-              privateKey: atob('${{ secrets.APP_ISSUEOPS_PEM }}'),
+              privateKey: Buffer.from('${{ secrets.APP_ISSUEOPS_PEM }}', 'base64').toString(),
               // optional: this will make appOctokit authenticate as app (JWT)
               //           or installation (access token), depending on the request URL
               installationId: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
