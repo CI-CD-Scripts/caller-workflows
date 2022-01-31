@@ -40,15 +40,19 @@ jobs:
               // installationId: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
             },
           });
+          const app_installation = await appOctokit.rest.apps.getRepoInstallation({
+            owner: context.payload.organization.login,
+            repo: context.payload.repository.name
+          });
           const { token } = await appOctokit.auth({
             type: "installation",
             // defaults to `options.auth.installationId` set in the constructor
-            installationId: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
+            installationId: app_installation.data.id
           });
           //core.setSecret(token) // Not needed - seems set by octokit
           console.log(token)
           
           const jwt_access_token = await appOctokit.rest.apps.createInstallationAccessToken({
-            installation_id: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
+            installation_id: app_installation.data.id
           });
           console.log(jwt_access_token.data.token)
