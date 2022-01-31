@@ -37,7 +37,7 @@ jobs:
               privateKey: Buffer.from('${{ secrets.APP_ISSUEOPS_PEM }}', 'base64').toString(),
               // optional: this will make appOctokit authenticate as app (JWT)
               //           or installation (access token), depending on the request URL
-              installationId: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
+              // installationId: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
             },
           });
           const { token } = await appOctokit.auth({
