@@ -48,7 +48,7 @@ jobs:
           //core.setSecret(token) // Not needed - seems set by octokit
           console.log(token)
           
-          const { jwt_access_token } = await appOctokit.rest.apps.createInstallationAccessToken({
+          const jwt_access_token = await appOctokit.rest.apps.createInstallationAccessToken({
             installation_id: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
           });
-          console.log(jwt_access_token)
+          console.log(jwt_access_token.data.token)
