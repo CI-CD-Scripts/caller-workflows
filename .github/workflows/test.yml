@@ -17,14 +17,6 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
-    - name: Get token using github-script
-      uses: actions/github-script@v5
-      with:
-        script: |
-          const { token } = await github.rest.apps.createInstallationAccessToken({
-            installation_id: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
-          });
-          console.log(token)
     - name: Install @octokit/rest & @octokit/auth-app
       run: |
         npm install @octokit/rest @octokit/auth-app
@@ -55,3 +47,8 @@ jobs:
           });
           //core.setSecret(token) // Not needed - seems set by octokit
           console.log(token)
+          
+          const { jwt_access_token } = await appOctokit.rest.apps.createInstallationAccessToken({
+            installation_id: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
+          });
+          console.log(jwt_access_token)
