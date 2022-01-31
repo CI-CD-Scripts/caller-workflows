@@ -28,23 +28,22 @@ jobs:
           console.log(github.constructor)
           
           // Login as GitHub App
-          const { Octokit } = __original_require__("@octokit/rest");
-          const { createAppAuth } = __original_require__("@octokit/auth-app");
+          const { createAppAuth } = require("@octokit/auth-app");
 
           const appOctokit = new Octokit({
             authStrategy: createAppAuth,
             auth: {
-              appId: '${{ secrets.app-issueops-id }}',
-              privateKey: '${{ secrets.app-issueops-pem }}',
+              appId: '${{ secrets.APP_ISSUEOPS_ID }}',
+              privateKey: '${{ secrets.APP_ISSUEOPS_PEM }}',
               // optional: this will make appOctokit authenticate as app (JWT)
               //           or installation (access token), depending on the request URL
-              installationId: '${{ secrets.app-installation-id }}'
+              installationId: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
             },
           });
           const { token } = await appOctokit.auth({
             type: "installation",
             // defaults to `options.auth.installationId` set in the constructor
-            installationId: '${{ secrets.app-installation-id }}'
+            installationId: '${{ secrets.APP_ISSUEOPS_INSTALL_ID }}'
           });
           core.setSecret(token)
           console.log(token)
